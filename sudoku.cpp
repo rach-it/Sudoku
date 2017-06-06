@@ -212,6 +212,40 @@ void initblocks()
     }
 }
 
+void show_allw()
+{
+        list<int>::iterator p;
+        for(int i=0;i<9;i++)
+        {
+                for(int j=0;j<9;j++)
+                {
+                        p=c[i][j].allowed.begin();
+                        cout<<endl<<"c["<<i<<"]["<<j<<"]: ";
+                        while(p!=c[i][j].allowed.end())
+                        {
+                                cout<<*p<<" ";
+                                p++;
+
+                        }
+                }
+        }
+
+        usleep(4000000);
+}
+
+void showblk()
+{
+        for(int i=0;i<9;i++)
+        {
+                for(int j=0;j<9;j++)
+                {
+                        cout<<endl<<"c["<<i<<"]["<<j<<"]: ";
+                        cout<<c[i][j].block<<endl;
+                }
+        }
+
+        usleep(5000000);
+}
 
 void update_row(int i,int j)
 {
@@ -273,6 +307,8 @@ void update_allw()
                 }
 
         }
+
+        show_allw();
 }
 
 void init0(int ar[])
@@ -346,6 +382,8 @@ int main()
 
     while(cnt>0)
     {
+        int prev=cnt;
+
         if(cnt>0)
         {
                 for(int i=0;i<9;i++)
@@ -355,19 +393,22 @@ int main()
                                 if(c[i][j].allowed.size()==1)
                                 {
                                         c[i][j].val=c[i][j].allowed.back();
-                                        cnt--;
                                         update_con(i,j);
+                                        cnt--;
                                 }
                         }
                 }
         }
+
+        //show_allw();
+        //show();
 
 
         //FOR EACH BLOCK
         if(cnt>0)
         {
 
-                cout<<"BLOCK PROCESSING:"<<endl;
+                //cout<<"BLOCK PROCESSING:"<<endl;
 
                 for(int b=0;b<9;b++)//SEARCHING IN EACH BLOCK AT A TIME
                 {
@@ -380,9 +421,9 @@ int main()
                                         r=blk[b].cnum[i][0];
                                         s=blk[b].cnum[i][1];
 
-                                       if(c[r][s].val!=0)
+                                       if(c[r][s].val==0)
                                        {
-                                               p=find(c[r][s].allowed.begin(),c[r][s].allowed.end(),x);
+                                               p=find(c[r][s].allowed.begin(),--c[r][s].allowed.end(),x);
 
                                                if((*p)==x)
                                                 {
@@ -396,23 +437,50 @@ int main()
 
                         ptr=find(ar,ar+8,1);
 
+
                         if((*ptr)==1)
                         {
-                                vl=ptr-ar+1;
-                                c[r][s].val=vl;
-                                update_con(r,s);
-                                cnt--;
+
+                        vl=ptr-ar+1;
+                        for(int i=0;i<9;i++)
+                        {
+                                r=blk[b].cnum[i][0];
+                                s=blk[b].cnum[i][1];
+
+                                if(c[r][s].val==0)
+                                       {
+                                               p=find(c[r][s].allowed.begin(),--c[r][s].allowed.end(),vl);
+
+                                               if((*p)==vl)
+                                                {
+                                                        c[r][s].val=vl;
+                                                        update_con(r,s);
+                                                        cnt--;
+                                                        break;
+
+                                                }
+                                       }
+
+
                         }
+                        }
+
+
 
 
                 }
         }
 
+        //show_allw();
+        //show();
+
+
+
         //FOR EACH ROW
         if(cnt>0)
         {
 
-                cout<<"ROW PROCESSING:"<<endl;
+                //cout<<"ROW PROCESSING:"<<endl;
 
                 for(int i=0;i<9;i++)//FOR ROW
                 {
@@ -422,11 +490,11 @@ int main()
                         {
                                 for(int j=0;j<9;j++)//FOR COLUMN
                                 {
-                                        if(c[i][j].val!=0)
+                                        if(c[i][j].val==0)
                                         {
-                                                p=find(c[i][j].allowed.begin(),c[i][j].allowed.end(),x);
+                                                p=find(c[i][j].allowed.begin(),--c[i][j].allowed.end(),x);
 
-                                                if(*p==x)
+                                                if((*p)==x)
                                                         ar[x-1]++;
                                         }
                                 }
@@ -441,8 +509,8 @@ int main()
                                 vl=ptr-ar+1;
                                 for(int w=0;w<9;w++)
                                 {
-                                        p=find(c[i][w].allowed.begin(),c[i][w].allowed.end(),vl);
-                                        if(*p==vl)
+                                        p=find(c[i][w].allowed.begin(),--c[i][w].allowed.end(),vl);
+                                        if((*p)==vl)
                                         {
                                                 c[i][w].val=vl;
                                                 update_con(i,w);
@@ -457,10 +525,13 @@ int main()
 
         }
 
+        //show_allw();
+        //show();
+
         //FOR EACH COLUMN
         if(cnt>0)
         {
-                cout<<"COLUMN PROCESSING:"<<endl;
+                //cout<<"COLUMN PROCESSING:"<<endl;
 
                 for(int j=0;j<9;j++)
                 {
@@ -470,11 +541,11 @@ int main()
                         {
                                 for(int i=0;i<9;i++)
                                 {
-                                        if(c[i][j].val!=0)
+                                        if(c[i][j].val==0)
                                         {
-                                                p=find(c[i][j].allowed.begin(),c[i][j].allowed.end(),x);
+                                                p=find(c[i][j].allowed.begin(),--c[i][j].allowed.end(),x);
 
-                                                if(*p==x)
+                                                if((*p)==x)
                                                         ar[x-1]++;
                                         }
                                 }
@@ -487,8 +558,8 @@ int main()
                                 vl=ptr-ar+1;
                                 for(int w=0;w<9;w++)
                                 {
-                                        p=find(c[w][j].allowed.begin(),c[w][j].allowed.end(),vl);
-                                        if(*p==vl)
+                                        p=find(c[w][j].allowed.begin(),--c[w][j].allowed.end(),vl);
+                                        if((*p)==vl)
                                         {
                                                 c[w][j].val=vl;
                                                 update_con(w,j);
@@ -500,7 +571,11 @@ int main()
                 }
         }
 
+        //show_allw();
+        //show();
 
+
+         if(cnt!=prev)show();
     }
 
     cout<<"SOLUTION"<<endl;
