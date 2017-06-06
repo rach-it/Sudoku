@@ -230,7 +230,7 @@ void show_allw()
                 }
         }
 
-        usleep(4000000);
+        //usleep(4000000);
 }
 
 void showblk()
@@ -244,7 +244,7 @@ void showblk()
                 }
         }
 
-        usleep(5000000);
+        //usleep(5000000);
 }
 
 void update_row(int i,int j)
@@ -386,7 +386,7 @@ int main()
 
         if(cnt>0)
         {
-                cout<<"In SINGLE - LOOP"<<endl;
+                //cout<<"In SINGLE - LOOP"<<endl;
                 for(int i=0;i<9;i++)
                 {
                         for(int j=0;j<9;j++)
@@ -403,15 +403,15 @@ int main()
         }
 
         //show_allw();
-        show();
-        usleep(4000000);
+        //show();
+        //usleep(4000000);
 
 
         //FOR EACH BLOCK
         if(cnt>0)
         {
 
-                cout<<"BLOCK PROCESSING:"<<endl;
+                //cout<<"BLOCK PROCESSING:"<<endl;
 
                 for(int b=0;b<9;b++)//SEARCHING IN EACH BLOCK AT A TIME
                 {
@@ -476,8 +476,8 @@ int main()
         }
 
         //show_allw();
-        show();
-        usleep(4000000);
+        //show();
+        //usleep(4000000);
 
 
 
@@ -485,7 +485,7 @@ int main()
         if(cnt>0)
         {
 
-                cout<<"ROW PROCESSING:"<<endl;
+                //cout<<"ROW PROCESSING:"<<endl;
 
                 for(int i=0;i<9;i++)//FOR ROW
                 {
@@ -532,14 +532,14 @@ int main()
         }
 
         //show_allw();
-        show();
-        usleep(4000000);
+        //show();
+        //usleep(4000000);
 
 
         //FOR EACH COLUMN
         if(cnt>0)
         {
-                cout<<"COLUMN PROCESSING:"<<endl;
+                //cout<<"COLUMN PROCESSING:"<<endl;
 
                 for(int j=0;j<9;j++)
                 {
@@ -581,10 +581,10 @@ int main()
         }
 
         //show_allw();
-        show();
-        usleep(4000000);
+        //show();
+        //usleep(4000000);
 
-         //if(cnt!=prev)show(),show_allw();
+         if(cnt!=prev)show(),show_allw();
     }
 
     cout<<"SOLUTION"<<endl;
