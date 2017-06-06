@@ -6,4 +6,5 @@ and the program will complete the remaining cells
 
 The program works if there is no 'guessing' involved
 
-The 
+The program works on an elimination algorithm
+
