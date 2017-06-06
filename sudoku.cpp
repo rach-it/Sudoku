@@ -386,6 +386,7 @@ int main()
 
         if(cnt>0)
         {
+                cout<<"In SINGLE - LOOP"<<endl;
                 for(int i=0;i<9;i++)
                 {
                         for(int j=0;j<9;j++)
@@ -393,6 +394,7 @@ int main()
                                 if(c[i][j].allowed.size()==1)
                                 {
                                         c[i][j].val=c[i][j].allowed.back();
+                                        c[i][j].allowed.clear();
                                         update_con(i,j);
                                         cnt--;
                                 }
@@ -401,14 +403,15 @@ int main()
         }
 
         //show_allw();
-        //show();
+        show();
+        usleep(4000000);
 
 
         //FOR EACH BLOCK
         if(cnt>0)
         {
 
-                //cout<<"BLOCK PROCESSING:"<<endl;
+                cout<<"BLOCK PROCESSING:"<<endl;
 
                 for(int b=0;b<9;b++)//SEARCHING IN EACH BLOCK AT A TIME
                 {
@@ -454,6 +457,7 @@ int main()
                                                if((*p)==vl)
                                                 {
                                                         c[r][s].val=vl;
+                                                        c[r][s].allowed.clear();
                                                         update_con(r,s);
                                                         cnt--;
                                                         break;
@@ -472,7 +476,8 @@ int main()
         }
 
         //show_allw();
-        //show();
+        show();
+        usleep(4000000);
 
 
 
@@ -480,7 +485,7 @@ int main()
         if(cnt>0)
         {
 
-                //cout<<"ROW PROCESSING:"<<endl;
+                cout<<"ROW PROCESSING:"<<endl;
 
                 for(int i=0;i<9;i++)//FOR ROW
                 {
@@ -513,6 +518,7 @@ int main()
                                         if((*p)==vl)
                                         {
                                                 c[i][w].val=vl;
+                                                c[i][w].allowed.clear();
                                                 update_con(i,w);
                                                 cnt--;
                                                 break;
@@ -526,12 +532,14 @@ int main()
         }
 
         //show_allw();
-        //show();
+        show();
+        usleep(4000000);
+
 
         //FOR EACH COLUMN
         if(cnt>0)
         {
-                //cout<<"COLUMN PROCESSING:"<<endl;
+                cout<<"COLUMN PROCESSING:"<<endl;
 
                 for(int j=0;j<9;j++)
                 {
@@ -562,6 +570,7 @@ int main()
                                         if((*p)==vl)
                                         {
                                                 c[w][j].val=vl;
+                                                c[w][j].allowed.clear();
                                                 update_con(w,j);
                                                 cnt--;
                                                 break;
@@ -572,10 +581,10 @@ int main()
         }
 
         //show_allw();
-        //show();
+        show();
+        usleep(4000000);
 
-
-         if(cnt!=prev)show();
+         //if(cnt!=prev)show(),show_allw();
     }
 
     cout<<"SOLUTION"<<endl;
